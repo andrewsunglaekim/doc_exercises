@@ -4,6 +4,7 @@ $(document).ready(function(){
   var ctx = $("#myChart").get(0).getContext("2d");
   var data = {
     labels: states,
+    title: "bob",
     datasets: [
       {
         label: "Number Of Employees",

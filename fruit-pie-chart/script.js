@@ -2,23 +2,24 @@ $(document).ready(function(){
   var ctx = $("#myChart").get(0).getContext("2d");
   var data = [
     {
-      value: 75,
+      value: 4,
       color: "chartreuse",
       highlight: "black",
-      label: "Apples"
+      label: "A - I"
     },
     {
-      value: 30,
+      value: 6,
       color: "orange",
       highlight: "red",
-      label: "Oranges"
+      label: "J-R"
     },
     {
-      value: 20,
+      value: 4,
       color: "yellow",
       highlight: "green",
-      label: "Bananas"
+      label: "S-Z"
     }
   ]
-  var myPieChart = new Chart(ctx).Pie(data)
+  var myPieChart = new Chart(ctx).Doughnut(data)
+  $("#legend").get(0).innerHTML = myPieChart.generateLegend()
 })
