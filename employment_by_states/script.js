@@ -27,38 +27,41 @@ $(document).ready(function(){
         yAxisTitle: "Employees in Manufactoring Sector",
         xAxisTitle: "Years"
       }
-      $("#employment-by-state").highcharts({
-        title:{
-          text: data.title,
-          x: -20
+      buildChart(data, $("#employment-by-state"))
+    })
+  }
+
+  function buildChart(data, el){
+    el.highcharts({
+      title:{
+        text: data.title
+      },
+      xAxis: {
+        title: {
+          text: data.xAxisTitle
         },
-        xAxis: {
-          title: {
-            text: data.xAxisTitle
-          },
-          categories: data.categories
+        categories: data.categories
+      },
+      yAxis: {
+        title: {
+          text: data.yAxisTitle
         },
-        yAxis: {
-          title: {
-            text: data.yAxisTitle
-          },
-          plotLines: [{
-            value: 0,
-            width: 1,
-            color: '#808080'
-          }]
-        },
-        legend: {
-          layout: 'vertical',
-          align: 'right',
-          verticalAlign: 'middle',
-          borderWidth: 0
-        },
-        series: [{
-          name: data.seriesName,
-          data: data.series
+        plotLines: [{
+          value: 0,
+          width: 1,
+          color: '#808080'
         }]
-      })
+      },
+      legend: {
+        layout: 'vertical',
+        align: 'right',
+        verticalAlign: 'middle',
+        borderWidth: 0
+      },
+      series: [{
+        name: data.seriesName,
+        data: data.series
+      }]
     })
   }
 
