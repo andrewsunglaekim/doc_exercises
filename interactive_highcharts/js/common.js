@@ -54,7 +54,7 @@ function graph(data, el) {
       }]
     },
     tooltip: {
-      valueSuffix: '°C'
+      valueSuffix: data.yAxisName
     },
     legend: {
       layout: 'vertical',
