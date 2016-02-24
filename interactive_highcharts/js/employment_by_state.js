@@ -1,7 +1,4 @@
 function graphState(id) {
-  var counter = 0;
-  var data = {};
-
   $.getJSON("http://api.census.gov/data/timeseries/asm/state?get=NAICS_TTL,EMP,GEO_TTL&for=state:" + id + "&YEAR=2005,2006,2007,2008,2009,2010,2011,2012,2013,2014&NAICS=31-33&key=81cdc733d3ac0f3496a88eebbed0a31478c403c6")
   .then(convertResultsToObjects)
   .then(function(results) {

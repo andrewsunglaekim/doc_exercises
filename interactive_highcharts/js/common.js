@@ -1,21 +1,34 @@
-function convertResultsToObjects(results) {
-  var objectArray = [];
-  var headers = results[0];
-  var numCols = headers.length;
-  var numRows = results.length;
+function convertResultsToObjects(response) {
+  // grab the header row, since it's always the first row
+  var headers = response[0];
 
-  for(var rowNum = 1; rowNum < numRows; rowNum++){
-    var currentRow = results[rowNum];
-    var newObj = {};
-    for(var colNum = 0; colNum < numCols; colNum++) {
-      var header = headers[colNum];
-      newObj[header] = currentRow[colNum];
+  var results = []; // empty array which will store our converted objects
+
+  // for each row, skipping the first (header) row
+  for(var row=1; row < response.length; row++) {
+    var currentRow = response[row]; // get the current row
+    var newRowObj = {}; // make a new object to hold the converted data
+
+    // for each column in the current row, move the data into the object
+    // using the headers as the key, and the value from the current row as the
+    // value
+    for(var col=0; col < currentRow.length; col++) {
+      var key  = headers[col];
+      var value = currentRow[col];
+
+      // we have to use the bracket notation here instead of the 'dot' notation
+      // because the key is a variable (i.e. we don't know what it is until
+      // the code runs)
+      newRowObj[key] = value;
     }
-    objectArray.push(newObj);
+
+    results.push(newRowObj);
   }
 
-  return objectArray;
+  // return the results so they can be used by the next function
+  return results;
 }
+
 
 
 function graph(data, el) {
