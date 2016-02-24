@@ -17,12 +17,52 @@ $(document).ready(function(){
     $.getJSON(url)
     .then(convertResultsToObjects)
     .then(function(results){
-      console.log(results)
+      var years = _.map(results, function(r) { return parseInt(r.YEAR); })
+      var employees = _.map(results, function(r) { return parseInt(r.EMP); })
+      var data = {
+        title: "Time Series by State: " + results[0].GEO_TTL,
+        categories: years,
+        series: employees,
+        seriesName: results[0].GEO_TTL,
+        yAxisTitle: "Employees in Manufactoring Sector",
+        xAxisTitle: "Years"
+      }
+      $("#employment-by-state").highcharts({
+        title:{
+          text: data.title,
+          x: -20
+        },
+        xAxis: {
+          title: {
+            text: data.xAxisTitle
+          },
+          categories: data.categories
+        },
+        yAxis: {
+          title: {
+            text: data.yAxisTitle
+          },
+          plotLines: [{
+            value: 0,
+            width: 1,
+            color: '#808080'
+          }]
+        },
+        legend: {
+          layout: 'vertical',
+          align: 'right',
+          verticalAlign: 'middle',
+          borderWidth: 0
+        },
+        series: [{
+          name: data.seriesName,
+          data: data.series
+        }]
+      })
     })
   }
 
   function convertResultsToObjects(response) {
-    console.log(response)
     // grab the header row, since it's always the first row
     var headers = response[0];
 
